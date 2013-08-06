@@ -58,10 +58,10 @@ var causeSchema = new Schema({
   logo: { type: 'url', default: 'http://example.com/logo.png' }
 });
 
-var User = badger.model('User', userSchema);
-var Clubhouse = badger.model('Clubhouse', clubhouseSchema, 'causes_sponsors');
-var Sponsor = badger.model('Sponsor', sponsorSchema);
-var Cause = badger.model('Cause', causeSchema);
+var User = hyena.model('User', userSchema);
+var Clubhouse = hyena.model('Clubhouse', clubhouseSchema, 'causes_sponsors');
+var Sponsor = hyena.model('Sponsor', sponsorSchema);
+var Cause = hyena.model('Cause', causeSchema);
 
 var sponsor = new Sponsor();
 sponsor.name = 'Test Sponsor';

@@ -3,6 +3,8 @@ Hyena
 
 A Node.js Mongoose like ORM for MySQL
 
+[![Build Status](https://travis-ci.org/plus3network/hyena.png?branch=master)](https://travis-ci.org/plus3network/hyena)
+
 ## Install
 
 ```

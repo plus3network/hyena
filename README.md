@@ -1,4 +1,4 @@
-hyena
+Hyena
 =====
 
 A Node.js Mongoose like ORM for MySQL

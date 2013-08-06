@@ -95,11 +95,6 @@ Hyena's are the closest relative to the Mongoose even though they look very diff
 SO when using this library keep that in mind. While this library is very similar
 to Mongoose it's also very different.
 
-## Why? Really Why?
-
-Well... I hate ORMs and I've always hated ORMs until I used Mongoose's ODM. I
-started drinking the Koolaid and realized that I just hated shitty ORMs. So
-there you go... That's why!
 
 ## License
 

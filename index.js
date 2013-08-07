@@ -14,6 +14,9 @@ _.extend(hyena, events.EventEmitter.prototype);
 events.EventEmitter.call(hyena);
 
 hyena.Schema = Schema;
+hyena.Document = Document;
+hyena.Query = Query;
+hyena.Model = Model;
 
 hyena.models = {};
 

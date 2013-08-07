@@ -25,7 +25,10 @@
     "mpath": "~0.2.1"
   },
   "devDependencies": {
-    "mocha": "~1.12.0"
+    "mocha": "~1.12.0",
+    "chai": "~1.7.2",
+    "seedling": "0.0.3",
+    "Faker": "~0.5.11"
   },
   "author": "Chris Cowan",
   "license": "MIT",

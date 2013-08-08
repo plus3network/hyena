@@ -39,6 +39,8 @@ hyena.model = function (name, schema, table) {
   // Generate the new model
   var NewModel = Model.generate(name, table, schema, hyena);
 
+  hyena.models[name] = NewModel;
+
   // Add the custom schema type
   schemajs.types[name] = function (value) {
     return (value instanceof NewModel);

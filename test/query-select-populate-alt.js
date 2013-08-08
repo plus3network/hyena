@@ -5,6 +5,7 @@ var hyena = require('../');
 var Schema = hyena.Schema;
 require('mocha');
 
+
 var expectedSQL = 'SELECT ' 
                 + '`__users__`.`id` AS __users___id, '
                 + '`__users__`.`name` AS __users___name, '
@@ -13,9 +14,6 @@ var expectedSQL = 'SELECT '
                 + '`__users__`.`best_friend_id` AS __users___best_friend_id, '
                 + '`__bestFriend__`.`id` AS __bestFriend___id, '
                 + '`__bestFriend__`.`name` AS __bestFriend___name, '
-                + '`__bestFriend__`.`email` AS __bestFriend___email, '
-                + '`__bestFriend__`.`causes_sponsors_id` AS __bestFriend___causes_sponsors_id, '
-                + '`__bestFriend__`.`best_friend_id` AS __bestFriend___best_friend_id, '
                 + '`__clubhouse__`.`id` AS __clubhouse___id, '
                 + '`__clubhouse__`.`sponsor_id` AS __clubhouse___sponsor_id, '
                 + '`__clubhouse__`.`cause_id` AS __clubhouse___cause_id, '
@@ -34,13 +32,15 @@ var expectedValues= [];
 describe('Select Query', function () {
   describe('between', function () {
 
-    it('should generate the proper SQL', function () {
+    it('should generate the proper SQL alt interface', function () {
       var query = new Query(hyena.model('User'), { useAlias: true });
       query
-        .populate('bestFriend')
+        .populate({
+          path: 'bestFriend',
+          select: 'name'
+        })
         .populate('clubhouse.sponsor');
-      var string = query.toString();
-      assert.equal(expectedSQL, string);
+      assert.equal(expectedSQL, query.toString());
       assert.deepEqual(expectedValues, query.values());
     });
 

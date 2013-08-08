@@ -3,7 +3,10 @@ var seed = require('../test/fixtures/seed');
 
 var User = hyena.model('User');
 
-User.find().populate('bestFriend').exec(function (err, docs) {
+User.find()
+.select('name')
+.populate({ path: 'bestFriend', select: 'name' })
+.exec(function (err, docs) {
   if (err) {
     console.log(err.stack);
   }

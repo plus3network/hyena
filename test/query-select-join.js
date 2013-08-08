@@ -1,9 +1,11 @@
 var Query = require('../lib/query');
 var assert = require('assert');
+var seed = require('./fixtures/seed');
+var db = seed.db;
 require('mocha');
 
 var expectedSQL = 
-	"SELECT `users`.* "+
+	"SELECT `users`.`id` AS users_id, `users`.`name` AS users_name "+
 	"FROM `users` "+
 	"INNER JOIN `clubhouses` ON (`clubhouses`.`id` = `users`.`clubhouse_id`) "+
 	"OUTER JOIN `avatars` ON (`avatars`.`id` = `clubhouses`.`avatar_id`) "+
@@ -14,10 +16,10 @@ describe('Select Query', function () {
   describe('join', function () {
 
     it('should generate the proper SQL', function () {
-      var query = new Query({ table: 'users' });
+      var query = new Query(db.model('User'));
 
       query
-        .select()
+        .select('name')
         .join('clubhouses', 'id')
         .on('clubhouse_id')
         .join('avatars', 'id', 'outer')

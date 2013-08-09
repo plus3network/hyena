@@ -28,12 +28,7 @@ hyena.Model = Model;
 
 hyena.models = {};
 
-hyena.connect = function (connection) {
-  this.connection = connection;
-  return this.connection;
-};
-
-hyena.createConnection = function (dsnString) {
+hyena.createConnection = function (dsnString, options, callback) {
   if ('string' !== typeof(dsnString)) {
     throw new Error('You must suppy a connection string');
   }
@@ -42,10 +37,11 @@ hyena.createConnection = function (dsnString) {
   var protocol = protocols[dsn.protocol];
 
   if (!protocol) throw new Error("The protocol "+dsn.protocol+" is not supported");
-  
-  return this.connect(protocol(_.omit(dsn, 'protocol')));
-  
+  this.connection = protocol(_.omit(dsn, 'protocol'), options, callback);
+
 };
+
+hyena.connect = hyena.createConnection;
 
 hyena.model = function (name, schema, table) {
   // If the user is just getting the model then return it.

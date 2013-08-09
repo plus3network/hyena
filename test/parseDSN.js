@@ -1,0 +1,39 @@
+var parseDSN = require('../lib/parseDSN');
+var expect = require('chai').expect;
+require('mocha');
+
+describe('parseDSN', function () {
+
+  it('should parse the protocal', function () {
+    var dsn = parseDSN('mysql://localhost/example');
+    expect(dsn).to.have.property('protocol', 'mysql');
+  });
+
+  it('should parse the host', function () {
+    var dsn = parseDSN('mysql://localhost/example');
+    expect(dsn).to.have.property('host', 'localhost');
+  });
+
+  it('should parse the port', function () {
+    var dsn = parseDSN('mysql://localhost:3306/example');
+    expect(dsn).to.have.property('port', 3306);
+  });
+
+  it('should parse the database', function () {
+    var dsn = parseDSN('mysql://localhost/example');
+    expect(dsn).to.have.property('database', 'example');
+  });
+
+  it('should parse the user', function () {
+    var dsn = parseDSN('mysql://exampleUser@localhost/example');
+    expect(dsn).to.have.property('user', 'exampleUser');
+  });
+
+  it('should parse the user and password', function () {
+    var dsn = parseDSN('mysql://exampleUser:secret@localhost/example');
+    expect(dsn).to.have.property('user', 'exampleUser');
+    expect(dsn).to.have.property('password', 'secret');
+  });
+
+
+});

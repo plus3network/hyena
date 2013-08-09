@@ -3,13 +3,9 @@ var Faker    = require('Faker');
 var async    = require('async');
 var _        = require('lodash');
 var hyena    = require('../../');
-var mysql    = require('../../lib/mysql');
 var Schema   = hyena.Schema;
 
-hyena.connect(mysql({
-  user: "travis",
-  database: "hyena_test"
-}));
+hyena.createConnection('mysql://travis@localhost/hyena_test');
 
 hyena.on('error', function (err) {
   console.log('Hyena:', err.stack);

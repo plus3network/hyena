@@ -4,9 +4,17 @@ var Schema     = require('./lib/schema');
 var Document   = require('./lib/document');
 var Query      = require('./lib/query');
 var Model      = require('./lib/model');
+var parseDSN   = require('./lib/parseDSN');
 var schemajs = require('schemajs');
 var events = require('events');
 var _ = require('lodash');
+
+var protocols = {
+  mysql: require('./lib/mysql'),
+  pgsql: require('./lib/pgsql'),
+  postgres: require('./lib/pgsql'),
+  pg: require('./lib/pgsql')
+};
 
 var hyena = module.exports = { };
 
@@ -22,6 +30,21 @@ hyena.models = {};
 
 hyena.connect = function (connection) {
   this.connection = connection;
+  return this.connection;
+};
+
+hyena.createConnection = function (dsnString) {
+  if ('string' !== typeof(dsnString)) {
+    throw new Error('You must suppy a connection string');
+  }
+
+  var dsn = parseDSN(dsnString);
+  var protocol = protocols[dsn.protocol];
+
+  if (!protocol) throw new Error("The protocol "+dsn.protocol+" is not supported");
+  
+  return this.connect(protocol(_.omit(dsn, 'protocol')));
+  
 };
 
 hyena.model = function (name, schema, table) {

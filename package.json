@@ -22,7 +22,8 @@
     "async": "~0.2.9",
     "inflection": "~1.2.6",
     "mysql": "~2.0.0-alpha8",
-    "mpath": "~0.2.1"
+    "mpath": "~0.2.1",
+    "state-machine": "0.0.3"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

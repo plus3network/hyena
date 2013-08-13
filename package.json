@@ -30,7 +30,8 @@
     "chai": "~1.7.2",
     "seedling": "0.0.3",
     "Faker": "~0.5.11",
-    "sinon": "~1.7.3"
+    "sinon": "~1.7.3",
+    "moment": "~2.1.0"
   },
   "author": "Chris Cowan",
   "license": "MIT",

@@ -23,7 +23,8 @@
     "inflection": "~1.2.6",
     "mysql": "~2.0.0-alpha8",
     "mpath": "~0.2.1",
-    "state-machine": "0.0.3"
+    "state-machine": "0.0.3",
+    "glob": "~3.2.6"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

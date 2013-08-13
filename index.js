@@ -41,6 +41,8 @@ hyena.createConnection = function (dsnString, options, callback) {
 
 };
 
+hyena.bootstrap = require('./lib/bootstrap');
+
 hyena.connect = hyena.createConnection;
 
 hyena.model = function (name, schema, table) {

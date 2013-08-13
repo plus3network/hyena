@@ -1,6 +1,6 @@
 {
   "name": "hyena",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A Mongoose Like ORM for MySQL",
   "main": "index.js",
   "scripts": {

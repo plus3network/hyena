@@ -28,7 +28,8 @@ describe('Query', function () {
       query
 				.upsert(doc);
       assert.equal(expectedSQL, query.toString());
-      assert.deepEqual(expectedValues, query.values());
+      var values = query.values();
+      assert.deepEqual(expectedValues, values);
     });
 
   });

@@ -17,7 +17,7 @@ describe('Schema', function () {
 
     it('should have user in models', function () {
       expect(models).to.have.property('user');
-      expect(models).to.have.deep.property('user.model', 'User');
+      expect(models).to.have.deep.property('user.type', 'User');
       expect(models).to.have.deep.property('user.table', 'activities');
       expect(models).to.have.deep.property('user.field', 'user_id');
     });

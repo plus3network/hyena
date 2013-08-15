@@ -79,7 +79,13 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+DROP TABLE IF EXISTS `friends`;
 
+CREATE TABLE `friends` (
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `friend_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`user_id`,`friend_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

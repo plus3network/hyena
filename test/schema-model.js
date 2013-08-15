@@ -16,7 +16,7 @@ describe('Schema', function () {
     });
 
     it('should have valid model', function () {
-      expect(model).to.have.property('model', 'User');
+      expect(model).to.have.property('type', 'User');
       expect(model).to.have.property('table', 'activities');
       expect(model).to.have.property('field', 'user_id');
     });

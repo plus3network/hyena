@@ -44,7 +44,15 @@ describe('Select Query', function () {
       assert.deepEqual(expectedValues, query.values());
     });
 
+    it('should generate the proper SQL', function () {
+      var query = new Query(hyena.model('User'), { useAlias: true });
+      query
+        .populate('bestFriend clubhouse.sponsor');
+      var string = query.toString();
+      assert.equal(expectedSQL, string);
+      assert.deepEqual(expectedValues, query.values());
+    });
+
   });
 });
-
 

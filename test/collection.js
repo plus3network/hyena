@@ -7,7 +7,11 @@ require('mocha');
 describe('Collection', function() {
 
   beforeEach(function (done) {
-    seed.db.connection.query('TRUNCATE TABLE `friends`', done);
+    seed.clear(function () {
+      seed.create(function () {
+        seed.db.connection.query('TRUNCATE TABLE `friends`', done);
+      });
+    });
   });
 
   it('should instance of an array and collection', function(done) {

@@ -17,7 +17,7 @@ describe('Document collection', function () {
     seed.clear(function () {
       seed.create(function () {
         var conn = hyena.connection;
-        var query = "INSERT INTO `friends` VALUES (1,2), (1,3), (1,4), (1,5)";
+        var query = "INSERT INTO `friends` VALUES (1,2,'APPROVE'), (1,3,'APPROVE'), (1,4,'APPROVE'), (1,5,'PENDING')";
         conn.query(query, done);
       });
     });
@@ -30,10 +30,10 @@ describe('Document collection', function () {
   });
 
 
-  it('should popuate friends with 4 friends', function(done) {
+  it('should popuate friends with 3 friends', function(done) {
     User.findById(1, function (err, doc) {
       doc.populate('friends', function (err, doc) {
-        expect(doc).to.have.property('friends').to.have.length(4);
+        expect(doc).to.have.property('friends').to.have.length(3);
        done();
       });
     });
@@ -51,9 +51,19 @@ describe('Document collection', function () {
   it('should have property friends instance of Collection', function(done) {
     var doc = new User({ id: 1 });
     var friend = new User({ id: 3 });
-    friend.friends.add(doc, function (err) {
+    var additionalFields = { status: 'APPROVE' };
+    friend.friends.add(doc, additionalFields, function (err) {
       expect(friend.friends).to.have.length(1);
-      expect(friend.friends).to.include(doc);
+      expect(friend.friends[0].id).to.equal(1);
+      done();
+    });
+  });
+
+  it('should add additonal fields', function(done) {
+    var doc = new User({ id: 1 });
+    var friend = new User({ id: 3 });
+    friend.friends.add(doc, function (err) {
+      expect(friend.friends).to.have.length(0);
       done();
     });
   });

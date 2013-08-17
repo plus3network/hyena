@@ -9,16 +9,18 @@ var expectedSQL = 'INSERT INTO `users` '
 								+ '`users`.`name` = ?, '
 								+ '`users`.`email` = ?, '
 								+ '`users`.`causes_sponsors_id` = ?, '
+								+ '`users`.`privacy` = ?, '
 								+ '`users`.`best_friend_id` = ?, '
 								+ '`users`.`id` = ? '
 								+ 'ON DUPLICATE KEY UPDATE '
 								+ '`users`.`name` = ?, '
 								+ '`users`.`email` = ?, '
 								+ '`users`.`causes_sponsors_id` = ?, '
+								+ '`users`.`privacy` = ?, '
 								+ '`users`.`best_friend_id` = ?';
-var expectedValues= ['Joe Doe', 'joe.doe@example.com', 1, 2, 1, 'Joe Doe', 'joe.doe@example.com', 1, 2];
+var expectedValues= ['Joe Doe', 'joe.doe@example.com', 1, 'public', 2, 1, 'Joe Doe', 'joe.doe@example.com', 1, 'public', 2];
 
-var doc = { name: "Joe Doe", email: 'joe.doe@example.com', causes_sponsors_id: 1, best_friend_id: 2, id: 1 };
+var doc = { name: "Joe Doe", email: 'joe.doe@example.com', causes_sponsors_id: 1, best_friend_id: 2, id: 1, privacy: 'public' };
 
 describe('Query', function () {
   describe('upsert', function () {

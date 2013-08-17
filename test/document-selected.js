@@ -23,7 +23,7 @@ describe('Document', function () {
     it('should populate selected', function (done) {
       var query = Model.findById(1).exec(function (err, doc) {
         expect(doc.selected).to.be.ok;
-        expect(Object.keys(doc.selected)).to.be.length(4);
+        expect(Object.keys(doc.selected)).to.be.length(5);
         done();
       });
     });

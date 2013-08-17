@@ -15,9 +15,19 @@ var User = hyena.model('User', new Schema({
   name: { type: 'string', required: true },
   email: { type: 'email', require: true },
   clubhouse: { type: 'Clubhouse', field: 'causes_sponsors_id' },
+  privacy: { type: 'string', default: 'public' },
   bestFriend: { type: 'User', field: 'best_friend_id' },
-  friends: { type: 'array', schema: { type: "User", through: 'friends', field: 'user_id', foriegn_key: 'friend_id' }},
-  bestFriendsOf: { type: 'array', schema: { type: "User", foriegn_key: "best_friend_id" } }
+  friends: { type: 'array', schema: { 
+    type: "User", 
+    through: 'friends', 
+    field: 'user_id', 
+    foriegn_key: 'friend_id', 
+    match: { status: 'APPROVE'} 
+  }},
+  bestFriendsOf: { type: 'array', schema: { 
+    type: "User", 
+    foriegn_key: "best_friend_id" 
+  }}
 }));
 
 var Clubhouse = hyena.model('Clubhouse', new Schema({
@@ -99,6 +109,7 @@ seed.post('create', function (next) {
 seed.post("create", function (next) {
   async.each(seed.collection.User, function (doc, callback) {
     doc.best_friend_id = (doc.id === 1)? 2 : 1;
+    doc.privacy = (doc.id === 4)? 'friends' : 'public';
     doc.save(callback);
   }, next);
 });

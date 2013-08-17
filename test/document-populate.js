@@ -16,7 +16,7 @@ describe('Document populate', function () {
     seed.clear(function () {
       seed.create(function () {
         var conn = hyena.connection;
-        var query = "INSERT INTO `friends` VALUES (1,2), (1,3), (1,4), (1,5)";
+        var query = "INSERT INTO `friends` VALUES (1,2,'APPROVE'), (1,3,'APPROVE'), (1,4,'APPROVE'), (1,5,'PENDING')";
         conn.query(query, done);
       });
     });
@@ -112,14 +112,32 @@ describe('Document populate', function () {
       });
     });
 
+    it('should populate bestFriendsOf friends', function(done) {
+      User.findById(1, function (err, doc) {
+        doc.populate({ 
+          path: 'bestFriendsOf',
+          select: "name",
+          match: { privacy: 'friends' }
+        }, function (err, doc) {
+          expect(doc).to.have.property('bestFriendsOf').to.be.instanceof(Array);
+          expect(doc).to.have.property('bestFriendsOf').to.have.length(1);
+          doc.bestFriendsOf.forEach(function (friend) {
+            expect(friend).to.have.property('name');
+            expect(friend).to.not.have.property('email');
+          });
+          done();
+        });
+      });
+    });
+
   });
 
   describe('many to many', function () {
 
-    it('should popuate friends with 4 friends', function(done) {
+    it('should popuate friends with 3 friends', function(done) {
       User.findById(1, function (err, doc) {
         doc.populate('friends', function (err, doc) {
-          expect(doc.friends).to.have.length(4);
+          expect(doc.friends).to.have.length(3);
           doc.friends.forEach(function (friend) {
             expect(friend).to.have.property('id');
             expect(friend).to.have.property('name');
@@ -138,7 +156,27 @@ describe('Document populate', function () {
           path: 'friends',
           select: 'name'
         }, function (err, doc) {
-          expect(doc.friends).to.have.length(4);
+          expect(doc.friends).to.have.length(3);
+          doc.friends.forEach(function (friend) {
+            expect(friend).to.have.property('id');
+            expect(friend).to.have.property('name');
+            expect(friend).to.not.have.property('email');
+            expect(friend).to.not.have.property('causes_sponsors_id');
+            expect(friend).to.not.have.property('best_friend_id');
+          });
+          done();
+        });
+      });
+    });
+
+    it('should select fields with 1 match', function(done) {
+      User.findById(1, function (err, doc) {
+        doc.populate({
+          path: 'friends',
+          select: 'name',
+          match: { status: 'PENDING' }
+        }, function (err, doc) {
+          expect(doc.friends).to.have.length(1);
           doc.friends.forEach(function (friend) {
             expect(friend).to.have.property('id');
             expect(friend).to.have.property('name');

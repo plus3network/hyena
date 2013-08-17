@@ -10,13 +10,13 @@ var Faker    = require('Faker');
 var User     = hyena.model('User');
 require('mocha');
 
-describe('Document populate', function () {
+describe('Model populate', function () {
   
   beforeEach(function (done) {
     seed.clear(function () {
       seed.create(function () {
         var conn = hyena.connection;
-        var query = "INSERT INTO `friends` VALUES (1,2), (1,3), (1,4), (1,5)";
+        var query = "INSERT INTO `friends` VALUES (1,2,'APPROVE'), (1,3,'APPROVE'), (1,4,'APPROVE'), (1,5,'PENDING')";
         conn.query(query, done);
       });
     });

@@ -18,7 +18,7 @@ describe('Collection', function() {
     User.findById(1, function (err, doc) {
       doc.populate('friends', function (err, doc) {
         var def = User.schema.model('friends');
-        var col = new Collection(def, doc, []);
+        var col = new Collection('friends', def, doc, []);
         expect(col).to.be.instanceof(Collection);
         expect(col).to.be.instanceof(Array);
         done();
@@ -30,10 +30,11 @@ describe('Collection', function() {
     User.findById(3, function (err, doc) {
       doc.populate('friends', function (err, doc) {
         var def = User.schema.model('friends');
-        var col = new Collection(def, doc, []);
+        var col = new Collection('friends', def, doc, []);
         var friend = new User({ id: 1 });
-        col.add(friend, function (err, doc) {
-          expect(col).to.include(doc);
+        col.add(friend, { status: 'APPROVE' }, function (err, doc) {
+          expect(doc.friends).to.have.length(1);
+          expect(doc.friends[0].id).to.equal(1);
           done();
         });
       });
@@ -44,13 +45,11 @@ describe('Collection', function() {
     User.findById(3, function (err, doc) {
       doc.populate('friends', function (err, doc) {
         var def = User.schema.model('friends');
-        var col = new Collection(def, doc, []);
+        var col = new Collection('friends', def, doc, []);
         var friend = new User({ id: 1 });
         col.add(friend, function (err, doc) {
-          expect(col).to.include(doc);
           col.remove(1, function (err) {
-            expect(col).to.not.include(doc);
-            expect(col).to.have.length(0);
+            expect(doc.friends).to.have.length(0);
             done();
           });
         });

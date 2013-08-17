@@ -10,11 +10,13 @@ var expectedSQL = 'SELECT '
                 + '`__users__`.`name` AS __users___name, '
                 + '`__users__`.`email` AS __users___email, '
                 + '`__users__`.`causes_sponsors_id` AS __users___causes_sponsors_id, '
+                + '`__users__`.`privacy` AS __users___privacy, '
                 + '`__users__`.`best_friend_id` AS __users___best_friend_id, '
                 + '`__bestFriend__`.`id` AS __bestFriend___id, '
                 + '`__bestFriend__`.`name` AS __bestFriend___name, '
                 + '`__bestFriend__`.`email` AS __bestFriend___email, '
                 + '`__bestFriend__`.`causes_sponsors_id` AS __bestFriend___causes_sponsors_id, '
+                + '`__bestFriend__`.`privacy` AS __bestFriend___privacy, '
                 + '`__bestFriend__`.`best_friend_id` AS __bestFriend___best_friend_id, '
                 + '`__clubhouse__`.`id` AS __clubhouse___id, '
                 + '`__clubhouse__`.`sponsor_id` AS __clubhouse___sponsor_id, '
@@ -32,7 +34,7 @@ var expectedSQL = 'SELECT '
 var expectedValues= [];
 
 describe('Select Query', function () {
-  describe('between', function () {
+  describe('populate', function () {
 
     it('should generate the proper SQL', function () {
       var query = new Query(hyena.model('User'), { useAlias: true });

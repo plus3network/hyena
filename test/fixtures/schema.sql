@@ -75,6 +75,7 @@ CREATE TABLE `users` (
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `causes_sponsors_id` int(11) DEFAULT NULL,
+  `privacy` varchar(255) DEFAULT NULL 'public',
   `best_friend_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

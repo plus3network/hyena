@@ -49,6 +49,8 @@ hyena.model = function (name, schema, table) {
   // If the user is just getting the model then return it.
   if (arguments.length === 1) return this.models[name];
 
+  if (!table) table = schema.options.table; 
+
   // If the table name isn't supplied then we are going to use the name with
   // underscores and pluralized
   if (!table) {

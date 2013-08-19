@@ -11,7 +11,8 @@ describe('Schema', function () {
       model = new Schema({
         name: { type: 'string', required: true },
         avatar: { type: 'url', default: 'http://example.com/avatar.jpg' },
-        user: { type: 'User', field: 'user_id'}
+        user: { type: 'User', field: 'user_id'},
+        created_on: { type: 'date', default: function () { return new Date(); } }
       });
     });
 
@@ -23,6 +24,11 @@ describe('Schema', function () {
     it('should apply default to avatar', function () {
       var results = model.validate({});
       expect(results.data.avatar).to.equal('http://example.com/avatar.jpg');
+    });
+
+    it('should apply default to created_on', function () {
+      var results = model.validate({});
+      expect(results.data.created_on).to.be.instanceof(Date);
     });
 
   });

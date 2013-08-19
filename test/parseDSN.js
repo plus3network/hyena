@@ -35,5 +35,14 @@ describe('parseDSN', function () {
     expect(dsn).to.have.property('password', 'secret');
   });
 
+  it('should parse weird passwords', function () {
+    var dsn = parseDSN('mysql://exampleUser:xxx`xxx-+^xxxx(xx-xxx@localhost/example');
+    expect(dsn).to.have.property('protocol', 'mysql');
+    expect(dsn).to.have.property('user', 'exampleUser');
+    expect(dsn).to.have.property('host', 'localhost');
+    expect(dsn).to.have.property('password', 'xxx`xxx-+^xxxx(xx-xxx');
+    expect(dsn).to.have.property('database', 'example');
+  });
+
 
 });

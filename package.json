@@ -4,7 +4,8 @@
   "description": "A Mongoose Like ORM for MySQL",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha"
+    "test": "node_modules/.bin/mocha",
+    "setup": ""
   },
   "repository": {
     "type": "git",

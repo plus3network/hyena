@@ -50,6 +50,17 @@ describe('Model populate', function () {
     });
   });
 
+  it('should populate multiple paths with a string', function (done) {
+    User.findById(1, function (err, doc) {
+      User.populate(doc, 'clubhouse.sponsor clubhouse.cause', function (err, doc) {
+        expect(doc).to.have.property('clubhouse');
+        expect(doc).to.have.property('clubhouse').to.have.property('cause');
+        expect(doc).to.have.property('clubhouse').to.have.property('sponsor');
+        done();
+      });
+    }); 
+  });
+
 
 });
 

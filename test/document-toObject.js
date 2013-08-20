@@ -12,7 +12,7 @@ require('mocha');
 describe('Document', function () {
   describe('toObject', function () {
 
-    var doc, schema, TestModel;
+    var doc, testSchema, TestModel;
 
     beforeEach(function () {
      testSchema = new Schema({

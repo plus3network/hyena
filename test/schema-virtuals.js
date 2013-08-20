@@ -14,7 +14,7 @@ require('mocha');
 describe('Schema', function () {
   describe('virtuals', function () {
 
-    var schema, TestModel;
+    var testSchema, TestModel;
 
     beforeEach(function () {
      testSchema = new Schema({

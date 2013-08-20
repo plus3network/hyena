@@ -60,13 +60,13 @@ describe('Document getters/setters', function () {
   });
 
   it('should allow you to set a custom getter', function () {
-     testSchema = new Schema({
+     var testSchema = new Schema({
        name: { type: 'string', get: function (v) {
          return v + ' is the greatest!';
        }}
       });
 
-      TestModel = Model.generate('TestModel', 'users', testSchema, hyena);
+      var TestModel = Model.generate('TestModel', 'users', testSchema, hyena);
 
       var doc = new TestModel({ name: "John" });
       expect(doc.name).to.equal('John is the greatest!');
@@ -74,13 +74,13 @@ describe('Document getters/setters', function () {
   });
 
   it('should allow you to set a custom setter', function () {
-     testSchema = new Schema({
+     var testSchema = new Schema({
        name: { type: 'string', set: function (v) {
          return inflection.capitalize(v);
        }}
       });
 
-      TestModel = Model.generate('TestModel', 'users', testSchema, hyena);
+      var TestModel = Model.generate('TestModel', 'users', testSchema, hyena);
 
       var doc = new TestModel({ name: "john" });
       expect(doc.attributes.name).to.equal('John');

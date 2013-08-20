@@ -21,12 +21,12 @@ var User = hyena.model('User', new Schema({
     type: "User", 
     through: 'friends', 
     field: 'user_id', 
-    foriegn_key: 'friend_id', 
+    foreign_key: 'friend_id', 
     match: { status: 'APPROVE'} 
   }},
   bestFriendsOf: { type: 'array', schema: { 
     type: "User", 
-    foriegn_key: "best_friend_id" 
+    foreign_key: "best_friend_id" 
   }}
 }));
 

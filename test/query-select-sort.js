@@ -6,12 +6,12 @@ var Schema = hyena.Schema;
 require('mocha');
 
 var expectedSQL = 'SELECT ' 
-                + '`__users__`.`id` AS __users___id, '
-                + '`__users__`.`name` AS __users___name, '
-                + '`__users__`.`email` AS __users___email, '
-                + '`__users__`.`causes_sponsors_id` AS __users___causes_sponsors_id, '
-                + '`__users__`.`privacy` AS __users___privacy, '
-                + '`__users__`.`best_friend_id` AS __users___best_friend_id, '
+                + '`__parent__`.`id` AS __parent___id, '
+                + '`__parent__`.`name` AS __parent___name, '
+                + '`__parent__`.`email` AS __parent___email, '
+                + '`__parent__`.`causes_sponsors_id` AS __parent___causes_sponsors_id, '
+                + '`__parent__`.`privacy` AS __parent___privacy, '
+                + '`__parent__`.`best_friend_id` AS __parent___best_friend_id, '
                 + '`__clubhouse__`.`id` AS __clubhouse___id, '
                 + '`__clubhouse__`.`sponsor_id` AS __clubhouse___sponsor_id, '
                 + '`__clubhouse__`.`cause_id` AS __clubhouse___cause_id, '
@@ -21,10 +21,10 @@ var expectedSQL = 'SELECT '
                 + '`__clubhouse_sponsor__`.`id` AS __clubhouse_sponsor___id, '
                 + '`__clubhouse_sponsor__`.`name` AS __clubhouse_sponsor___name, '
                 + '`__clubhouse_sponsor__`.`logo` AS __clubhouse_sponsor___logo '
-                + 'FROM `users` AS `__users__` '
-                + 'INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__users__`.`causes_sponsors_id`) '
+                + 'FROM `users` AS `__parent__` '
+                + 'INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__parent__`.`causes_sponsors_id`) '
                 + 'INNER JOIN `sponsors` AS `__clubhouse_sponsor__` ON (`__clubhouse_sponsor__`.`id` = `__clubhouse__`.`sponsor_id`) '
-                + 'ORDER BY `__clubhouse_sponsor__`.`name` DESC, `__users__`.`name` ASC';
+                + 'ORDER BY `__clubhouse_sponsor__`.`name` DESC, `__parent__`.`name` ASC';
 var expectedValues= [];
 
 describe('Select Query', function () {

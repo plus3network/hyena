@@ -24,13 +24,13 @@ describe('Select Query', function () {
     it('should generate the proper SQL populates', function () {
 			var expectedSQL = 
 				"SELECT "+
-				"`__users__`.`id` AS __users___id, "+
-				"`__users__`.`name` AS __users___name, "+
-				"`__users__`.`email` AS __users___email, "+
+				"`__parent__`.`id` AS __parent___id, "+
+				"`__parent__`.`name` AS __parent___name, "+
+				"`__parent__`.`email` AS __parent___email, "+
 				"`__bestFriend__`.`id` AS __bestFriend___id, "+
 				"`__bestFriend__`.`name` AS __bestFriend___name "+
-				"FROM `users` AS `__users__` "+
-				"INNER JOIN `users` AS `__bestFriend__` ON (`__bestFriend__`.`id` = `__users__`.`best_friend_id`)";
+				"FROM `users` AS `__parent__` "+
+				"INNER JOIN `users` AS `__bestFriend__` ON (`__bestFriend__`.`id` = `__parent__`.`best_friend_id`)";
       var query = new Query(db.model('User'), { useAlias: true });
       query
 				.select('name email')

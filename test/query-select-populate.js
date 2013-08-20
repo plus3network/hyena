@@ -6,12 +6,12 @@ var Schema = hyena.Schema;
 require('mocha');
 
 var expectedSQL = 'SELECT ' 
-                + '`__users__`.`id` AS __users___id, '
-                + '`__users__`.`name` AS __users___name, '
-                + '`__users__`.`email` AS __users___email, '
-                + '`__users__`.`causes_sponsors_id` AS __users___causes_sponsors_id, '
-                + '`__users__`.`privacy` AS __users___privacy, '
-                + '`__users__`.`best_friend_id` AS __users___best_friend_id, '
+                + '`__parent__`.`id` AS __parent___id, '
+                + '`__parent__`.`name` AS __parent___name, '
+                + '`__parent__`.`email` AS __parent___email, '
+                + '`__parent__`.`causes_sponsors_id` AS __parent___causes_sponsors_id, '
+                + '`__parent__`.`privacy` AS __parent___privacy, '
+                + '`__parent__`.`best_friend_id` AS __parent___best_friend_id, '
                 + '`__bestFriend__`.`id` AS __bestFriend___id, '
                 + '`__bestFriend__`.`name` AS __bestFriend___name, '
                 + '`__bestFriend__`.`email` AS __bestFriend___email, '
@@ -27,9 +27,9 @@ var expectedSQL = 'SELECT '
                 + '`__clubhouse_sponsor__`.`id` AS __clubhouse_sponsor___id, '
                 + '`__clubhouse_sponsor__`.`name` AS __clubhouse_sponsor___name, '
                 + '`__clubhouse_sponsor__`.`logo` AS __clubhouse_sponsor___logo '
-                + 'FROM `users` AS `__users__` '
-                + 'INNER JOIN `users` AS `__bestFriend__` ON (`__bestFriend__`.`id` = `__users__`.`best_friend_id`) '
-                + 'INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__users__`.`causes_sponsors_id`) '
+                + 'FROM `users` AS `__parent__` '
+                + 'INNER JOIN `users` AS `__bestFriend__` ON (`__bestFriend__`.`id` = `__parent__`.`best_friend_id`) '
+                + 'INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__parent__`.`causes_sponsors_id`) '
                 + 'INNER JOIN `sponsors` AS `__clubhouse_sponsor__` ON (`__clubhouse_sponsor__`.`id` = `__clubhouse__`.`sponsor_id`)';
 var expectedValues= [];
 

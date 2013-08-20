@@ -8,14 +8,14 @@ describe('Select Query', function () {
   describe('equals', function () {
     var expectedSQL = 
       "SELECT "+
-      "`__users__`.`id` AS __users___id, "+
-      "`__users__`.`name` AS __users___name, "+
+      "`__parent__`.`id` AS __parent___id, "+
+      "`__parent__`.`name` AS __parent___name, "+
       "`__clubhouse__`.`id` AS __clubhouse___id, "+
       "`__clubhouse__`.`is_public` AS __clubhouse___is_public "+
-      "FROM `users` AS `__users__` "+
-      "INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__users__`.`causes_sponsors_id`) "+
+      "FROM `users` AS `__parent__` "+
+      "INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__parent__`.`causes_sponsors_id`) "+
       "WHERE `__clubhouse__`.`is_public` = ? "+
-      "AND `__users__`.`type` = ?";
+      "AND `__parent__`.`type` = ?";
     var expectedValues= [1,'test'];
 
     it('should generate the proper SQL', function () {

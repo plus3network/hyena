@@ -4,7 +4,7 @@ var db = seed.db;
 var assert = require('assert');
 require('mocha');
 
-var expectedSQL = "SELECT `__users__`.`id` AS __users___id, `__users__`.`name` AS __users___name FROM `users` AS `__users__` WHERE `__users__`.`amount` BETWEEN ? AND ?";
+var expectedSQL = "SELECT `__parent__`.`id` AS __parent___id, `__parent__`.`name` AS __parent___name FROM `users` AS `__parent__` WHERE `__parent__`.`amount` BETWEEN ? AND ?";
 var expectedValues= [0,10];
 
 describe('Select Query', function () {

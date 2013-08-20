@@ -40,7 +40,7 @@ describe('Model', function () {
 
     it('should call the constructor with the alias flag', function () {
       var query = Model.find();
-      expect(query.data.alias).to.equal('__users__');
+      expect(query.data.alias).to.equal('__parent__');
     });
 
     it('should call select for each field', function () {

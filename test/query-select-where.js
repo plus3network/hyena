@@ -15,8 +15,10 @@ describe('Select Query', function () {
       "FROM `users` AS `__parent__` "+
       "INNER JOIN `causes_sponsors` AS `__clubhouse__` ON (`__clubhouse__`.`id` = `__parent__`.`causes_sponsors_id`) "+
       "WHERE `__clubhouse__`.`is_public` = ? "+
+      "AND `__clubhouse__`.`is_open` = ? "+
+      "AND `__clubhouse__`.`is_wellness` = ? "+
       "AND `__parent__`.`type` = ?";
-    var expectedValues= [1,'test'];
+    var expectedValues= [1, false, true, 'test'];
 
     it('should generate the proper SQL', function () {
       var query = new Query(db.model('User'), { useAlias: true });
@@ -28,6 +30,10 @@ describe('Select Query', function () {
         })
         .where('clubhouse.is_public')
         .equals(1)
+        .where('clubhouse.is_open')
+        .equals(false)
+        .where('clubhouse.is_wellness')
+        .equals(true)
         .where('type')
         .equals('test');
       var sql = query.toString();

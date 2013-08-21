@@ -66,5 +66,22 @@ describe('Schema', function () {
       expect(doc.last_name).to.equal('Last');
     });
 
+    it('should allow you to set a virtual setter and getter', function () {
+      testSchema.virtual('name').set(function (value) {
+        var parts = value.split(' ');
+        this.first_name = parts[0];
+        this.last_name = parts[1];
+      });
+      testSchema.virtual('name').get(function () {
+        return this.first_name + ' ' + this.last_name;
+      });
+      var doc = new TestModel();
+      doc.set('name', 'First Last');
+      expect(doc.first_name).to.equal('First');
+      expect(doc.last_name).to.equal('Last');
+      expect(doc).to.have.property('name', 'First Last');
+
+    });
+
   });
 });

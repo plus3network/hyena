@@ -87,5 +87,4 @@ describe('Document getters/setters', function () {
 
   });
 
-
 });

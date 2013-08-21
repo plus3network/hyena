@@ -49,9 +49,11 @@ describe('Model', function () {
     });
 
     it('should call query.where().equals() for an equality query', function () {
-      var query = Model.find({ id: 1 });
+      var query = Model.find({ id: 1 , is_active: false });
       assert.calledWith(spies.where, 'id');
+      assert.calledWith(spies.where, 'is_active');
       assert.calledWith(spies.equals, 1);
+      assert.calledWith(spies.equals, false); 
     });
 
     it('should call query.where().in() for an array query', function () {

@@ -5,10 +5,10 @@ var _        = require('lodash');
 var hyena    = require('../../');
 var Schema   = hyena.Schema;
 
-var mysql_user = env.process.MYSQL_USER || 'travis';
-var mysql_password = env.process.MYSQL_PASSWORD || '';
+var mysql_user = process.env.MYSQL_USER || 'travis';
+if (process.env.MYSQL_PASSWORD)  mysql_user += ':' + process.env.MYSQL_PASSWORD;
 
-hyena.createConnection('mysql://'+mysql_user+':'+mysql_password+'@localhost/hyena_test');
+hyena.createConnection('mysql://'+mysql_user+'@localhost/hyena_test');
 
 hyena.on('error', function (err) {
   console.log('Hyena:', err.stack);

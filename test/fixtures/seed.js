@@ -5,7 +5,10 @@ var _        = require('lodash');
 var hyena    = require('../../');
 var Schema   = hyena.Schema;
 
-hyena.createConnection('mysql://travis@localhost/hyena_test');
+var mysql_user = env.process.MYSQL_USER || 'travis';
+var mysql_password = env.process.MYSQL_PASSWORD || '';
+
+hyena.createConnection('mysql://'+mysql_user+':'+mysql_password+'@localhost/hyena_test');
 
 hyena.on('error', function (err) {
   console.log('Hyena:', err.stack);
@@ -17,14 +20,14 @@ var User = hyena.model('User', new Schema({
   clubhouse: { type: 'Clubhouse', field: 'causes_sponsors_id' },
   privacy: { type: 'string', default: 'public' },
   bestFriend: { type: 'User', field: 'best_friend_id' },
-  friends: { type: 'array', schema: { 
+  friends: { type: 'join', schema: { 
     type: "User", 
     through: 'friends', 
     field: 'user_id', 
     foreign_key: 'friend_id', 
     match: { status: 'APPROVE'} 
   }},
-  bestFriendsOf: { type: 'array', schema: { 
+  bestFriendsOf: { type: 'join', schema: { 
     type: "User", 
     foreign_key: "best_friend_id" 
   }}

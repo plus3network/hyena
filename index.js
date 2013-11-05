@@ -9,6 +9,10 @@ var schemajs = require('schemajs');
 var events = require('events');
 var _ = require('lodash');
 
+schemajs.types.join = function (value) {
+  return true;
+};
+
 var protocols = {
   mysql: require('./lib/mysql'),
   pgsql: require('./lib/pgsql'),
@@ -72,4 +76,3 @@ hyena.model = function (name, schema, table) {
   // Return the new model
   return NewModel;
 };
-

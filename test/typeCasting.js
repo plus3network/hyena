@@ -29,6 +29,12 @@ describe('typeCasting', function () {
       .to.equal('test');
   });
 
+  it('should return a null for a string', function () {
+    var schema = { type: 'string' };
+    expect(typeCasting(null, schema, hyena))
+      .to.equal(null);
+  });
+
   it('should return a Sponsor', function () {
     var object = { 
       name: "test",

@@ -50,5 +50,10 @@ describe('Document set', function () {
     expect(doc.attributes['name']).to.equal(name);
   });
 
+  it('should set a field as null', function () {
+    doc.set({ name: null });
+    expect(doc.attributes['name']).to.be.null;
+  });
+
 });
   

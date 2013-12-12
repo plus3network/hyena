@@ -30,7 +30,7 @@ describe('Schema', function () {
       testSchema.virtual('under_13').get(function () {
         return moment().subtract('years', 13).toDate() < this.birthday;
       });
-      var doc = new TestModel({ name: Faker.Name.findName(), birthday: moment().subtract('years', 12).toDate() });
+      var doc = new TestModel({ first_name: Faker.Name.firstName(), last_name: Faker.Name.lastName(), birthday: moment().subtract('years', 12).toDate() });
       expect(doc.under_13).to.equal(true);
     });
 

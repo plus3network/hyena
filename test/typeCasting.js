@@ -38,7 +38,6 @@ describe('typeCasting', function () {
   it('should return a Sponsor', function () {
     var object = { 
       name: "test",
-      url: "http://www.example.com"
     };
     var schema = { type: 'Sponsor' };
     expect(typeCasting(object, schema, hyena))
@@ -50,12 +49,10 @@ describe('typeCasting', function () {
       cause: {
         id: 1,
         name: "Test Cause",
-        url: "http://www.example.com"
       },
       sponsor: {
         id: 2,
         name: "Test Sponsor",
-        url: "http://www.example-2.com"
       },
       cause_id: 1,
       sponsor_id: 2,

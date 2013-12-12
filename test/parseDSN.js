@@ -44,5 +44,16 @@ describe('parseDSN', function () {
     expect(dsn).to.have.property('database', 'example');
   });
 
+  it('should parse options', function () {
+    var dsn = parseDSN('mysql://exampleUser:xxx`xxx-+^xxxx(xx-xxx@localhost/example?connectionLimit=100&enc=UTF8');
+    expect(dsn).to.have.property('protocol', 'mysql');
+    expect(dsn).to.have.property('user', 'exampleUser');
+    expect(dsn).to.have.property('host', 'localhost');
+    expect(dsn).to.have.property('password', 'xxx`xxx-+^xxxx(xx-xxx');
+    expect(dsn).to.have.property('database', 'example');
+    expect(dsn).to.have.property('enc', 'UTF8');
+    expect(dsn).to.have.property('connectionLimit', '100');
+  });
+
 
 });

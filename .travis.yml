@@ -9,4 +9,6 @@ node_js:
 before_script:
   - mysql -e 'create database hyena_test;'
   - cat test/fixtures/schema.sql|mysql hyena_test
+after_script:
+  - npm run coverall
 

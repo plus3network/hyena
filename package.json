@@ -4,7 +4,8 @@
   "description": "A Mongoose Like ORM for MySQL",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverall": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
   },
   "repository": {
     "type": "git",
@@ -24,7 +25,9 @@
     "mpath": "~0.2.1",
     "state-machine": "0.0.3",
     "glob": "~3.2.6",
-    "schemajs": "git://github.com/plus3network/schemajs"
+    "schemajs": "git://github.com/plus3network/schemajs",
+    "mocha-lcov-reporter": "0.0.1",
+    "coveralls": "~2.6.1"
   },
   "devDependencies": {
     "mocha": "~1.12.0",

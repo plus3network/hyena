@@ -34,7 +34,7 @@ hyena.models = {};
 
 hyena.createConnection = function (dsnString, options, callback) {
   if ('string' !== typeof(dsnString)) {
-    throw new Error('You must suppy a connection string');
+    throw new Error('You must supply a connection string');
   }
 
   var dsn = parseDSN(dsnString);
